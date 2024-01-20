@@ -6,6 +6,10 @@ import './App.css';
 function App() {
   const [clicks, setClicks] = React.useState(0);
 
+  function resetClicks(){
+    setClicks(0);
+  }
+
   function increaseClicks() {
     setClicks(clicks + 1);
   }
@@ -14,6 +18,7 @@ function App() {
       <header className="App-header">
         <RedButton onClick={increaseClicks}>НЕ НАЖИМАТЬ!</RedButton>
         <Counter>И все же ты нажал{clicks}</Counter>
+        <GreenButton onClick={resetClicks}>Сброс!Пожалуйста!</GreenButton>
       </header>
     </div>
   );
@@ -44,4 +49,24 @@ const RedButton = styled.button({
 const Counter = styled.p({
   fontSize: 24,
   color: '#FFFFFF',
+})
+
+const GreenButton = styled.button({
+  height: 50,
+  width: 500,
+  backgroundColor: '#00FA9A',
+  color: '#CD853F',
+  fontSize: 20,
+  fontWeight: 500,
+  borderRadius: '40%',
+  border: '3px solid #FFFFFF',
+  cursor: 'pointer',
+
+  '&:hover': {
+    backgroundColor: '#008000',
+  },
+
+  '&:active': {
+    backgroundColor: '#9ACD32',
+  }
 })
