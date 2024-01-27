@@ -3,8 +3,22 @@ import logo from './logo.svg';
 import styled from 'styled-components';
 import './App.css';
 
+interface ClicksData{
+  clicks: number;
+}
+
 function App() {
   const [clicks, setClicks] = React.useState(0);
+
+  React.useEffect(function () {
+    fetch('http://localhost:8000/clicks')
+    .then(function (response) {
+      return response.json();
+     })
+     .then(function (data: ClicksData) {
+      setClicks(data.clicks);
+     });
+  }, []);
 
   function resetClicks(){
     setClicks(0);
@@ -12,6 +26,19 @@ function App() {
 
   function increaseClicks() {
     setClicks(clicks + 1);
+
+    const data: ClicksData = {
+      clicks: clicks + 1,
+    };
+
+    fetch('http://localhost:8000/clicks', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
   }
   return (
     <div className="App">
