@@ -20,10 +20,17 @@ function App() {
      });
   }, []);
 
+
+  
   function resetClicks(){
     setClicks(0);
+    fetch('http://localhost:8000/clicks', {
+      method: 'DELETE',
+    });
   }
 
+
+  
   function increaseClicks() {
     setClicks(clicks + 1);
 
